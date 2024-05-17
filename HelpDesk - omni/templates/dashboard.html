@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .dashboard-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        .header {
+            background-color: #002b49;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px 8px 0 0;
+        }
+        .content {
+            padding: 1rem;
+        }
+        .btn-primary, .btn-secondary {
+            background-color: #002b49;
+            border: none;
+            border-radius: 20px;
+            padding: 0.75rem 1.5rem;
+            color: white;
+            margin-top: 20px;
+            font-weight: bold;
+            width: 150px;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            background-color: #00aeef;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <h1>Welcome, {{ session['username'] }}!</h1>
+            <h2>{% if session['is_admin'] %}Admin Dashboard{% else %}User Dashboard{% endif %}</h2>
+        </div>
+        <div class="content">
+            {% if session['is_admin'] %}
+                <p>This is the admin dashboard where you can manage users and tickets.</p>
+                <a href="/admin/dashboard" class="btn btn-primary" style="width: 200px;">Admin&nbsp;Dashboard</a>
+            {% else %}
+                <p>This is your user dashboard where you can view and create tickets.</p>
+            {% endif %}
+            <a href="/submit_ticket" class="btn btn-secondary">Submit&nbsp;Ticket</a>
+            <a href="/tickets" class="btn btn-primary">View Tickets</a>
+        </div>
+    </div>
+</body>
+</html>
